@@ -1,4 +1,4 @@
-const CACHE='blockflow-v60';
+const CACHE='blockflow-v61';
 const APP_SHELL=[
  './',
  './index.html',

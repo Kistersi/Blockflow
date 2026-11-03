@@ -31,11 +31,11 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 .cell.filled{border-color:transparent;box-shadow:inset 0 1px 3px #ffffff30,0 1px 4px #0008}
 .cell.glow{position:relative;z-index:2;animation:lineGlow .9s ease-in-out infinite alternate;border:1px solid #fff!important;box-shadow:0 0 8px 3px #fff,0 0 18px 7px #a58aff,inset 0 0 10px #fff!important;filter:brightness(1.8)}
 @keyframes lineGlow{from{filter:brightness(1.15);box-shadow:0 0 5px 2px #fff,0 0 10px 4px #a58aff,inset 0 0 5px #fff}to{filter:brightness(2);box-shadow:0 0 10px 4px #fff,0 0 24px 10px #a58aff,inset 0 0 12px #fff}}
-.cell.preview{outline:1px solid #fff;background:#ffffff55!important}.cell.invalid{background:#d9576544!important}
+.cell.preview{outline:2px solid #fff;background:#65e6a788!important;box-shadow:0 0 9px #65e6a7aa}.cell.invalid{outline:2px solid #ff6577;background:#d9576577!important;box-shadow:0 0 8px #ff5266aa}
 .pieces{display:flex;justify-content:space-around;gap:8px;padding:7px;flex-shrink:0;min-height:80px}
 .pieceWrap{flex:1;display:flex;justify-content:center;align-items:center;min-width:0}
 .piece{display:grid;gap:3px;width:max-content;height:max-content;padding:5px;border-radius:10px;background:#222635;border:1px solid #454b61;align-content:start;justify-content:start}
-.piece.selected{border-color:var(--accent);background:#37304d;box-shadow:0 0 14px #9876ff55}.mini{display:block;width:clamp(9px,2.7vw,13px);height:clamp(9px,2.7vw,13px);border-radius:3px}
+.piece{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}.piece:active{cursor:grabbing}.piece.selected{border-color:var(--accent);background:#37304d;box-shadow:0 0 14px #9876ff55}.mini{display:block;width:clamp(9px,2.7vw,13px);height:clamp(9px,2.7vw,13px);border-radius:3px}
 .controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;flex-shrink:0}.message{text-align:center;color:var(--muted);font-size:11px;min-height:15px;flex-shrink:0}
 .achievement{display:flex;align-items:center;gap:8px;padding:7px;background:#222635;border:1px solid #353b50;border-radius:10px;min-width:0}
 .medal{width:34px;height:34px;border-radius:10px;background:#35304c;display:grid;place-items:center;font-size:18px;flex-shrink:0}

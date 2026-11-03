@@ -26,5 +26,9 @@ $('restart').onclick=()=>newGame();$('again').onclick=()=>newGame();
 $('classic').onclick=()=>{mode='classic';newGame()};$('challenge').onclick=()=>{mode='challenge';newGame()};
 $('gameTab').onclick=()=>{$('gameView').hidden=false;$('achView').hidden=true;$('gameTab').classList.add('active');$('achTab').classList.remove('active')};
 $('achTab').onclick=()=>{$('gameView').hidden=true;$('achView').hidden=false;$('achTab').classList.add('active');$('gameTab').classList.remove('active');renderAchievements()};
-newGame();renderAchievements();
+function showHome(){ $('appHeader').hidden=true;$('homeView').hidden=false;$('gameView').hidden=true;$('achView').hidden=true;$('topTabs').hidden=true; }
+function showGame(nextMode){mode=nextMode;$('appHeader').hidden=false;newGame();$('homeView').hidden=true;$('gameView').hidden=false;$('achView').hidden=true;$('topTabs').hidden=false;$('gameTab').classList.add('active');$('achTab').classList.remove('active')}
+function showAchievements(){ $('appHeader').hidden=true;$('homeView').hidden=true;$('gameView').hidden=true;$('achView').hidden=false;$('topTabs').hidden=true;renderAchievements() }
+$('startClassic').onclick=()=>showGame('classic');$('startChallenge').onclick=()=>showGame('challenge');$('openAchievements').onclick=showAchievements;$('backHome').onclick=showHome;$('backHomeAch').onclick=showHome;
+showHome();newGame();renderAchievements();
 })();

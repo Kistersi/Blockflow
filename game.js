@@ -38,7 +38,7 @@ $('board').addEventListener('click',e=>{let b=e.target.closest('[data-r]');if(!b
 function useBombAt(r,c){if(data.bombs<1||resolving)return;let size=(data.upgrades.bomb||0)+3,startR=r-Math.floor(size/2),startC=c-Math.floor(size/2),removed=0;for(let rr=startR;rr<startR+size;rr++)for(let cc=startC;cc<startC+size;cc++)if(rr>=0&&rr<10&&cc>=0&&cc<10&&board[rr][cc]){board[rr][cc]=null;removed++}data.bombs--;bombMode=false;persist();$('status').textContent='💥 Bombe gezündet! '+removed+' Felder geleert.';render();if(!anyMove())handleNoMoves()}
 $('chooseBomb').onclick=()=>{$('noMovesDialog').hidden=true;bombMode=true;render();$('status').textContent='Bombe aktiv: Ziehe eine Bombe auf das Spielfeld oder tippe auf BOMBE EINSETZEN und wähle das Zentrum.'};$('chooseGiveUp').onclick=()=>{$('noMovesDialog').hidden=true;finishGame()};
 $('useBomb').onclick=()=>{if(data.bombs<1)return;bombMode=!bombMode;render();$('status').textContent=bombMode?'Bombe aktiv: Tippe auf das Explosionszentrum.':'Bombeneinsatz abgebrochen.'};
-$('restart').onclick=()=>newGame();$('again').onclick=()=>{ $('gameOverView').hidden=true;$('gameView').hidden=false;newGame()};$('endHome').onclick=showHome;
+$('endGame').onclick=()=>{if(!ended)finishGame()};$('restart').onclick=()=>newGame();$('again').onclick=()=>{ $('gameOverView').hidden=true;$('gameView').hidden=false;newGame()};$('endHome').onclick=showHome;
 function hideAllPages(){['homeView','achView','gameView','gameOverView','upgradeView','storeView'].forEach(id=>$(id).hidden=true);$('appHeader').hidden=true;}
 function showHome(){hideAllPages();$('homeView').hidden=false;$('homeBest').textContent=data.best.toLocaleString('de-DE')}
 function showAchievements(){hideAllPages();$('achView').hidden=false;renderAchievements()}

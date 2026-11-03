@@ -131,6 +131,7 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 .home-actions{position:relative;z-index:15;gap:8px}
 .home-meta{position:relative;z-index:15}
 @media(max-height:700px){.energy-show{height:clamp(190px,34vh,245px);width:min(100%,340px)}.home{gap:8px}.energy-title{font-size:clamp(36px,8vw,48px)}}
+.round-coin-live{width:100%;font:inherit;text-align:left;cursor:pointer;transition:border-color .18s,background .18s}.round-coin-live:hover,.round-coin-live:focus-visible{border-color:#b58cff;background:#3a2d19;outline:none}.round-coin-live span small{font-size:8px;letter-spacing:.04em;color:#bda9df}.coin-dialog{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:20px;background:#080a12dd;backdrop-filter:blur(8px)}.coin-dialog-card{width:min(100%,390px);padding:20px;background:linear-gradient(150deg,#202033,#151925);border:1px solid #66518f;border-radius:18px;box-shadow:0 20px 70px #000b,0 0 32px #9165ff22}.coin-dialog-card h3{margin:4px 0 0;font-size:23px}.coin-close{width:36px;height:36px;padding:0;border-radius:50%;font-size:16px}.coin-intro{font-size:12px;line-height:1.5;color:var(--muted);margin:12px 0 16px}.coin-goal{padding:13px;margin-top:10px;background:#191e2d;border:1px solid #343b52;border-radius:12px}.coin-goal .between{align-items:flex-start;gap:8px}.coin-goal b{font-size:13px}.coin-goal strong{font-size:11px;color:#ffdc83;text-align:right}.coin-goal .progress{height:7px;margin:10px 0 6px}.coin-goal small{font-size:10px;color:var(--muted)}.coin-foot{font-size:10px;line-height:1.5;color:#a7abc0;margin-top:14px}
 @media(prefers-reduced-motion:reduce){.home-ambient i,.home-ambient:before,.home-ambient:after,.home-mark,.home-mark:before,.home-mark:after,.home-kicker,.home h2,.home-sub,.home-actions,.home-meta{animation:none!important}}
 </style>
 </head>
@@ -159,7 +160,16 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 <div class="stat"><small>REKORD</small><strong id="best">0</strong></div>
 <div class="stat"><small>GESAMT</small><strong id="total">0</strong></div>
 </div>
-<div class="round-coin-live"><span>RUNDE · VERDIENTE MÜNZEN</span><strong id="roundCoinLive">+0 🪙</strong></div>
+<button type="button" id="roundCoinLiveButton" class="round-coin-live" aria-haspopup="dialog" aria-controls="coinProgressDialog"><span>RUNDE · VERDIENTE MÜNZEN <small> · MÜNZEN-ÜBERSICHT ↗</small></span><strong id="roundCoinLive">+0 🪙</strong></button>
+<div id="coinProgressDialog" class="coin-dialog" hidden>
+  <div class="coin-dialog-card" role="dialog" aria-modal="true" aria-labelledby="coinDialogTitle">
+    <div class="between"><div><div class="home-kicker">DEIN FORTSCHRITT</div><h3 id="coinDialogTitle">Münzen verdienen</h3></div><button type="button" id="closeCoinDialog" class="coin-close" aria-label="Schließen">✕</button></div>
+    <p class="coin-intro">Du bekommst Münzen direkt während der Runde, sobald du diese Ziele erreichst.</p>
+    <div class="coin-goal"><div class="between"><b>🧩 Linien löschen</b><strong id="lineCoinStatus">Noch 10 Linien bis +1 🪙</strong></div><div class="progress"><div id="lineCoinBar"></div></div><small id="lineCoinDetail">0 von 10 Reihen oder Spalten gelöscht</small></div>
+    <div class="coin-goal"><div class="between"><b>⭐ Punkte sammeln</b><strong id="scoreCoinStatus">Noch 500 Punkte bis +5 🪙</strong></div><div class="progress"><div id="scoreCoinBar"></div></div><small id="scoreCoinDetail">0 von 500 Punkten erreicht</small></div>
+    <div class="coin-foot">Die Fortschritte gelten für diese Runde. Erreichte Münzen werden deinem Guthaben sofort gutgeschrieben.</div>
+  </div>
+</div>
 <div id="challengeBox" class="panel" hidden><div class="between"><b id="level">LEVEL 1</b><span id="goalText" style="color:var(--muted);font-size:12px">0 / 8 Linien</span></div><div class="progress"><div id="goalBar"></div></div></div>
 <div class="between"><div><b id="modeLabel" style="font-size:13px">CLASSIC · SPIELFELD 10 × 10</b><div id="hint" style="font-size:11px;color:var(--muted)">Stein auswählen und platzieren</div></div><div style="display:flex;gap:6px"><button id="backHome">⌂ Menü</button><button id="endGame">⏹ Beenden</button><button id="restart">↻ Neustart</button></div></div>
 <div id="board" class="board" aria-label="10 mal 10 Spielfeld"></div>

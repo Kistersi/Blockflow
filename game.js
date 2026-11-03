@@ -70,6 +70,7 @@ function showCoinMachine(){hideAllPages();$('coinMachineView').hidden=false;rend
 function renderCoinMachine(){
  const lv=data.upgrades.coinMachine||0,cost=25*(lv+1),rate=lv;
  $('machineCoins').textContent=data.coins;
+ const animation=$('machineAnimation');if(animation){animation.dataset.level=String(lv);animation.style.setProperty('--machine-speed',Math.max(1.05,4.1-lv*.29)+'s');$('machineAnimationCaption').textContent=lv?('PRODUKTION AKTIV · '+lv+' STEIN(E) · '+rate+' MÜNZEN/STUNDE'):'MASCHINE INAKTIV · AB STUFE 1';}
  $('machineLevel').textContent='STUFE '+lv+' / 10';
  $('machineRate').textContent=rate+' Münzen pro Stunde';
  $('machineMax').textContent='Bis zu '+(rate*12)+' Münzen je Offline-Zeit';

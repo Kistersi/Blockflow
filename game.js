@@ -36,6 +36,7 @@ $('achTab').onclick=()=>{$('gameView').hidden=true;$('achView').hidden=false;$('
 function hideAllPages(){['homeView','achView','gameView','gameOverView','upgradeView','storeView'].forEach(id=>$(id).hidden=true);$('appHeader').hidden=true;$('topTabs').hidden=true}
 function showHome(){hideAllPages();$('homeView').hidden=false;$('homeBest').textContent=data.best.toLocaleString('de-DE')}
 function showAchievements(){hideAllPages();$('achView').hidden=false;renderAchievements()}
+function applyModeTheme(){document.body.classList.remove('mode-classic','mode-challenge');document.body.classList.add(mode==='challenge'?'mode-challenge':'mode-classic');$('modeLabel').textContent=mode==='challenge'?'CHALLENGE · 10 × 10 SPIELFELD':'CLASSIC · SPIELFELD 10 × 10';$('hint').textContent=mode==='challenge'?'Erreiche 8 Linien für das nächste Level':'Platziere Steine und sammle Punkte'}
 function showGame(nextMode){mode=nextMode;applyModeTheme();newGame();hideAllPages();$('appHeader').hidden=false;$('gameView').hidden=false;$('topTabs').hidden=false;$('gameTab').classList.add('active');$('achTab').classList.remove('active')}
 function showUpgrades(){hideAllPages();$('upgradeView').hidden=false;renderUpgrades()}
 function showStore(){hideAllPages();$('storeView').hidden=false;renderStore()}

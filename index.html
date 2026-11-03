@@ -145,6 +145,13 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 @media(prefers-reduced-motion:reduce){.home-ambient i,.home-ambient:before,.home-ambient:after,.home-mark,.home-mark:before,.home-mark:after,.home-kicker,.home h2,.home-sub,.home-actions,.home-meta{animation:none!important}}
  .star-cell{color:#fff!important;font-size:clamp(13px,3.4vw,21px);font-weight:950;text-shadow:0 0 5px #fff,0 0 11px #ffe27a,0 0 18px #ffb52e}.star-drop-in{animation:starDropGlow .55s ease-out both}
 .star-rain-piece{border-color:#d8b85a!important;box-shadow:0 0 15px #f6d66b55!important}.star-rain-icon{font-size:24px;color:#ffe58a;text-shadow:0 0 12px #ffd24c}
+/* Verbrauchsgegenstände: kompakt und einheitlich wie die Bombe */
+.piece.star-rain-piece,.piece.magic-fill-piece{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:66px;min-width:66px;height:66px;min-height:66px;box-sizing:border-box;padding:4px;overflow:hidden;text-align:center}
+.piece.star-rain-piece{border-color:#d8b85a!important;background:radial-gradient(circle at 50% 18%,#4a4024,#202536 78%);box-shadow:0 0 10px #f6d66b30!important}
+.piece.magic-fill-piece{border-color:#9a75ff!important;background:radial-gradient(circle at 50% 18%,#382b58,#202536 78%);box-shadow:0 0 10px #9a75ff30!important}
+.star-rain-icon,.magic-fill-icon{display:block;font-size:21px;line-height:22px}
+.piece.star-rain-piece small,.piece.magic-fill-piece small{display:block;width:100%;font-size:8px;line-height:1.05;font-weight:900;letter-spacing:-.02em;white-space:nowrap;text-align:center}
+.magic-fill-icon{color:#c7aaff;text-shadow:0 0 9px #a47aff}
 @keyframes starDropGlow{0%{transform:scale(.25);filter:brightness(2.5)}65%{transform:scale(1.2)}100%{transform:scale(1);filter:brightness(1)}}
  .ad-info{display:block;margin-top:10px;color:var(--muted);font-size:10px;line-height:1.5}
 </style>

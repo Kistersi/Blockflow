@@ -32,8 +32,8 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 .cell.preview{outline:1px solid #fff;background:#ffffff55!important}.cell.invalid{background:#d9576544!important}
 .pieces{display:flex;justify-content:space-around;gap:8px;padding:7px;flex-shrink:0;min-height:80px}
 .pieceWrap{flex:1;display:flex;justify-content:center;align-items:center;min-width:0}
-.piece{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr);gap:3px;width:min(100%,72px);aspect-ratio:1;padding:5px;border-radius:10px;background:#222635;border:1px solid #454b61}
-.piece.selected{border-color:var(--accent);background:#37304d;box-shadow:0 0 14px #9876ff55}.mini{border-radius:3px}
+.piece{display:grid;gap:3px;width:max-content;height:max-content;padding:5px;border-radius:10px;background:#222635;border:1px solid #454b61;align-content:start;justify-content:start}
+.piece.selected{border-color:var(--accent);background:#37304d;box-shadow:0 0 14px #9876ff55}.mini{display:block;width:clamp(9px,2.7vw,13px);height:clamp(9px,2.7vw,13px);border-radius:3px}
 .controls{display:grid;grid-template-columns:1fr 1fr;gap:7px;flex-shrink:0}.message{text-align:center;color:var(--muted);font-size:11px;min-height:15px;flex-shrink:0}
 .achievement{display:flex;align-items:center;gap:8px;padding:7px;background:#222635;border:1px solid #353b50;border-radius:10px;min-width:0}
 .medal{width:34px;height:34px;border-radius:10px;background:#35304c;display:grid;place-items:center;font-size:18px;flex-shrink:0}
@@ -52,7 +52,7 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 .footer{text-align:center;font-size:9px;color:#646b80;padding:2px;flex-shrink:0}
 .mode-classic{--accent:#a58aff}.mode-challenge{--accent:#35c9e7}
 .mode-challenge .brand small{color:#35c9e7}.mode-challenge .piece.selected{border-color:#35c9e7}
-@media(max-height:700px){.app{gap:5px;padding:5px 0}#gameView{gap:4px}.stat{padding:5px 7px}.stat strong{font-size:17px}.pieces{min-height:66px;padding:5px}.piece{width:min(100%,62px)}.controls button{padding:7px}.board{width:min(100%,calc(100dvh - 345px));gap:2px;padding:4px}.home{gap:14px}.home-sub{font-size:12px}}
+@media(max-height:700px){.app{gap:5px;padding:5px 0}#gameView{gap:4px}.stat{padding:5px 7px}.stat strong{font-size:17px}.pieces{min-height:66px;padding:5px}.mini{width:clamp(8px,2.4vw,11px);height:clamp(8px,2.4vw,11px)}.controls button{padding:7px}.board{width:min(100%,calc(100dvh - 345px));gap:2px;padding:4px}.home{gap:14px}.home-sub{font-size:12px}}
 </style>
 </head>
 <body>
@@ -65,7 +65,6 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 <header id="appHeader" hidden><div class="brand"><small>PUZZLE EXPERIENCE</small><h1>BLOCK<span>FLOW</span></h1></div><div style="text-align:right;color:var(--muted);font-size:11px">OFFLINE READY<br>V 1.0</div></header>
 <nav id="topTabs" class="tabs" hidden><button id="gameTab" class="active">🎮 SPIELEN</button><button id="achTab">🏆 ERFOLGE</button></nav>
 <section id="gameView" class="view" hidden>
-<div class="tabs"><button id="classic" class="active">CLASSIC</button><button id="challenge">CHALLENGE</button></div>
 <div class="stats">
 <div class="stat"><small>PUNKTE</small><strong id="score">0</strong></div>
 <div class="stat"><small>REKORD</small><strong id="best">0</strong></div>

@@ -74,6 +74,21 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 @keyframes markSweep{0%,20%{transform:translateX(-90%) rotate(18deg)}65%,100%{transform:translateX(90%) rotate(18deg)}}
 @keyframes innerPulse{0%,100%{opacity:.4;transform:scale(.96)}50%{opacity:1;transform:scale(1)}}
 @keyframes fadeRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.demo-stage{width:min(100%,310px);margin:-7px auto -2px;padding:10px 13px 8px;border:1px solid #454064;border-radius:16px;background:linear-gradient(145deg,#1a1c2bdf,#111521eF);box-shadow:0 12px 38px #0005,0 0 28px #8d69ff18;position:relative;overflow:hidden;animation:fadeRise .9s .18s both}
+.demo-stage:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 15%,#a58aff0b 50%,transparent 85%);pointer-events:none}
+.demo-topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:8px;letter-spacing:.16em;font-weight:900;color:#a99acb}
+.demo-topline span:last-child{color:#6fdcb0}.demo-topline i{display:inline-block;width:5px;height:5px;border-radius:50%;background:#69e6aa;box-shadow:0 0 8px #69e6aa;margin-right:4px;vertical-align:1px;animation:liveBlink 1.2s infinite}
+.demo-board{width:min(100%,218px);aspect-ratio:1;margin:auto;display:grid;grid-template-columns:repeat(10,1fr);gap:3px;padding:6px;border:1px solid #3c4057;border-radius:9px;background:#0c101b;box-shadow:inset 0 0 24px #0009,0 0 24px #8d69ff12}
+.demo-cell{min-width:0;min-height:0;border-radius:2px;background:#252a3a;border:1px solid #33394c;opacity:.78;transition:background .2s,border-color .2s,transform .25s,opacity .25s,box-shadow .25s}
+.demo-cell.on{opacity:1;background:linear-gradient(145deg,#bba6ff,#7959e8);border-color:#d9ccff;box-shadow:0 0 7px #a58aff88,inset 0 1px 3px #fff8}
+.demo-cell.incoming{animation:stoneLand .42s cubic-bezier(.16,.8,.2,1) both}
+.demo-cell.clearing{background:#e8ddff!important;border-color:#fff!important;box-shadow:0 0 12px 4px #bba5ff,0 0 24px 8px #8e69ff!important;animation:lineVanish .55s ease-in forwards}
+.demo-caption{display:flex;justify-content:center;align-items:center;gap:9px;margin-top:8px;font-size:8px;font-weight:900;letter-spacing:.14em;color:#8289a2}.demo-caption b{font-size:11px;color:#a58aff}
+@keyframes stoneLand{0%{transform:translateY(-22px) scale(.45);opacity:0;filter:brightness(2)}65%{transform:translateY(2px) scale(1.12);opacity:1}100%{transform:translateY(0) scale(1);opacity:1;filter:brightness(1)}}
+@keyframes lineVanish{0%{transform:scale(1);opacity:1}45%{transform:scale(1.12);opacity:1}100%{transform:scale(.25);opacity:0;filter:brightness(2)}}
+@keyframes liveBlink{50%{opacity:.25}}
+@media(max-height:700px){.demo-stage{width:min(100%,270px);padding:7px 10px 6px}.demo-board{width:min(100%,178px);gap:2px;padding:4px}.demo-caption{margin-top:5px}.home{gap:10px}.home-mark{width:65px;height:65px;border-radius:19px;font-size:32px}.home-sub{margin-top:5px}}
+@media(prefers-reduced-motion:reduce){.demo-cell.incoming,.demo-cell.clearing,.demo-topline i{animation:none!important}.demo-cell{transition:none!important}}
 @media(prefers-reduced-motion:reduce){.home-ambient i,.home-ambient:before,.home-ambient:after,.home-mark,.home-mark:before,.home-mark:after,.home-kicker,.home h2,.home-sub,.home-actions,.home-meta{animation:none!important}}
 </style>
 </head>
@@ -82,6 +97,11 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 <section id="homeView" class="home">
   <div class="home-ambient" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div><div class="home-mark">▦</div><div class="home-kicker">PUZZLE EXPERIENCE</div><h2>BLOCK<span>FLOW</span></h2><p class="home-sub">Finde deinen Flow. Platziere deine Steine. Schlag deinen Rekord.</p><p class="home-sub">DEIN REKORD: <b id="homeBest">0</b></p></div>
+  <div class="demo-stage" aria-label="BLOCKFLOW Spielanimation">
+    <div class="demo-topline"><span>LIVE GAMEPLAY</span><span><i></i> FLOW IN MOTION</span></div>
+    <div class="demo-board" id="demoBoard" aria-hidden="true"></div>
+    <div class="demo-caption"><span>PLACE</span><b>→</b><span>COMPLETE</span><b>→</b><span>CLEAR</span></div>
+  </div>
   <div class="home-actions"><button id="startClassic" class="primary">▶ &nbsp; CLASSIC SPIELEN</button><button id="startChallenge" class="secondary">⚡ &nbsp; CHALLENGE</button><button id="openAchievements" class="secondary">🏆 &nbsp; ERFOLGE</button><button id="openStore" class="secondary">🛒 &nbsp; STORE</button><button id="openUpgrades" class="secondary">⚙️ &nbsp; UPGRADES</button></div>
   <div class="home-meta"><span>10 × 10 GRID</span><span>OFFLINE READY</span><span>V 1.0</span></div>
 </section>
@@ -115,5 +135,14 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 <section id="upgradeView" class="view" hidden><div class="between"><button id="backHomeUpgrades">← STARTSEITE</button><div class="coin-pill">🪙 <b id="upgradeCoins">0</b> MÜNZEN</div></div><div class="panel" style="padding:14px"><div class="home-kicker">DAUERHAFTE VERBESSERUNGEN</div><h2 style="margin:5px 0 4px;font-size:25px">UPGRADES</h2><p style="margin:0;color:var(--muted);font-size:12px">Verbessere dauerhaft deine Fähigkeiten und Bombenwirkung.</p></div><div id="upgradeList" class="upgrade-list"></div></section>
 <div class="footer">BLOCKFLOW · Dein Spiel. Deine Rekorde.</div>
 </main>
+<script>
+(()=>{const board=document.getElementById("demoBoard");if(!board)return;const cells=[];for(let i=0;i<100;i++){const cell=document.createElement("i");cell.className="demo-cell";board.appendChild(cell);cells.push(cell)}
+const line=Array.from({length:10},(_,i)=>90+i);let timer=null;
+const wait=ms=>new Promise(resolve=>{timer=setTimeout(resolve,ms)});
+async function cycle(){while(true){for(const idx of line){const cell=cells[idx];cell.classList.remove("clearing","incoming");cell.classList.add("on","incoming");await wait(115);cell.classList.remove("incoming")}
+line.forEach(idx=>cells[idx].classList.add("clearing"));await wait(620);line.forEach(idx=>cells[idx].classList.remove("on","clearing"));await wait(520)}}
+if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)cycle();else line.forEach(idx=>cells[idx].classList.add("on"));
+})();
+</script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));}</script><script src="game.js"></script>
 </body></html>

@@ -87,11 +87,5 @@ button.primary{background:linear-gradient(110deg,#7958ec,#a34fe2);border:0}
 </section>
 <div class="footer">BLOCKFLOW · Dein Spiel. Deine Rekorde.</div>
 </main>
-<script>
-function showHome(){document.getElementById('appHeader').hidden=true;document.getElementById('homeView').hidden=false;document.getElementById('gameView').hidden=true;document.getElementById('achView').hidden=true;document.getElementById('topTabs').hidden=true}
-function showGame(nextMode){mode=nextMode;document.getElementById('appHeader').hidden=false;newGame();document.getElementById('homeView').hidden=true;document.getElementById('gameView').hidden=false;document.getElementById('achView').hidden=true;document.getElementById('topTabs').hidden=false;document.getElementById('gameTab').classList.add('active');document.getElementById('achTab').classList.remove('active')}
-function showAchievements(){document.getElementById('appHeader').hidden=true;document.getElementById('homeView').hidden=true;document.getElementById('gameView').hidden=true;document.getElementById('achView').hidden=false;document.getElementById('topTabs').hidden=true;renderAchievements()}
-document.getElementById('startClassic').onclick=()=>showGame('classic');document.getElementById('startChallenge').onclick=()=>showGame('challenge');document.getElementById('openAchievements').onclick=showAchievements;document.getElementById('backHome').onclick=showHome;document.getElementById('backHomeAch').onclick=showHome;
-showHome();
-</script><script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));}</script><script src="game.js"></script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));}</script><script src="game.js"></script>
 </body></html>

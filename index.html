@@ -123,6 +123,14 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 @keyframes particleDrift{0%,100%{transform:translate(0,0) scale(.4);opacity:0}25%{opacity:1}70%{transform:translate(var(--dx),var(--dy)) scale(1.3);opacity:.9}90%{opacity:0}}
 @media(max-height:700px){.energy-show{height:clamp(125px,20vh,165px);width:min(100%,300px)}.energy-core{width:50px;height:50px}.energy-block{width:18px;height:18px}}
 @media(prefers-reduced-motion:reduce){.energy-grid,.energy-orbit,.energy-core,.energy-block,.energy-beam,.energy-burst,.energy-particle{animation:none!important}.energy-block{opacity:.8}}
+.home{gap:clamp(10px,2.2vh,18px);justify-content:center}
+.energy-show{width:min(100%,390px);height:clamp(230px,39vh,330px);margin:0 auto -2px;flex-shrink:0}
+.energy-title{position:absolute;z-index:12;left:50%;top:50%;transform:translate(-50%,-50%);width:100%;text-align:center;font-size:clamp(38px,9vw,54px);font-weight:950;letter-spacing:-.075em;line-height:1;color:#f7f5ff;text-shadow:0 2px 0 #fff8,0 0 10px #fff8,0 0 24px #a58aff,0 0 48px #895cffaa;white-space:nowrap;pointer-events:none;animation:titleReveal 1.1s cubic-bezier(.2,.8,.2,1) both}
+.energy-title span{color:#b79aff;text-shadow:0 0 12px #c5aaff,0 0 28px #925dff,0 0 48px #7949ff}
+@keyframes titleReveal{from{opacity:0;transform:translate(-50%,-43%) scale(.88);filter:blur(8px)}to{opacity:1;transform:translate(-50%,-50%) scale(1);filter:blur(0)}}
+.home-actions{position:relative;z-index:15;gap:8px}
+.home-meta{position:relative;z-index:15}
+@media(max-height:700px){.energy-show{height:clamp(190px,34vh,245px);width:min(100%,340px)}.home{gap:8px}.energy-title{font-size:clamp(36px,8vw,48px)}}
 @media(prefers-reduced-motion:reduce){.home-ambient i,.home-ambient:before,.home-ambient:after,.home-mark,.home-mark:before,.home-mark:after,.home-kicker,.home h2,.home-sub,.home-actions,.home-meta{animation:none!important}}
 </style>
 </head>
@@ -130,8 +138,9 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 <main class="app">
 <section id="homeView" class="home">
   <div class="home-ambient" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-  <div><div class="home-mark">▦</div><div class="home-kicker">PUZZLE EXPERIENCE</div><h2>BLOCK<span>FLOW</span></h2><p class="home-sub">Finde deinen Flow. Platziere deine Steine. Schlag deinen Rekord.</p><p class="home-sub">DEIN REKORD: <b id="homeBest">0</b></p></div>
+  <span id="homeBest" hidden>0</span>
   <div class="energy-show" aria-hidden="true">
+    <div class="energy-title">BLOCK<span>FLOW</span></div>
     <div class="energy-grid"></div><div class="energy-orbit orbit-a"></div><div class="energy-orbit orbit-b"></div>
     <div class="energy-beam beam-a"></div><div class="energy-beam beam-b"></div><div class="energy-beam beam-c"></div>
     <div class="energy-burst burst-a"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>

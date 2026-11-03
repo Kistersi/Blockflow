@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#10121b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BLOCKFLOW">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>BLOCKFLOW</title>
+<style>
+:root{color-scheme:dark;--bg:#10121b;--panel:#191c28;--line:#303448;--muted:#969bad;--violet:#a58aff}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:#f4f4f7;font-family:system-ui,-apple-system,sans-serif}
+body{padding:env(safe-area-inset-top) 14px env(safe-area-inset-bottom);overscroll-behavior:none}
+.app{max-width:520px;margin:auto;min-height:100dvh;display:flex;flex-direction:column;gap:12px;padding:12px 0}
+header,.between,.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand small{font-size:10px;letter-spacing:.25em;color:var(--violet);font-weight:800}.brand h1{margin:1px 0;font-size:27px;letter-spacing:-1px}.brand h1 span{color:var(--violet)}
+.panel,.stat{background:var(--panel);border:1px solid var(--line);border-radius:15px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+button{font:inherit;color:inherit;border:1px solid #3b4055;background:#292d3e;border-radius:11px;padding:10px 12px;font-weight:700;touch-action:manipulation}
+button.active{background:#42365f;border-color:var(--violet);color:#e0d4ff}
+button.primary{background:linear-gradient(110deg,#7958ec,#a34fe2);border:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{padding:9px 11px;min-width:0}.stat small{display:block;color:var(--muted);font-size:10px;letter-spacing:.08em}.stat strong{font-size:21px;font-variant-numeric:tabular-nums}
+#challengeBox{padding:11px 13px}.progress{height:6px;border-radius:10px;background:#373b4c;overflow:hidden;margin-top:8px}.progress div{height:100%;background:linear-gradient(90deg,#8666ff,#d06cff);width:0}
+.board{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px;padding:7px;background:#0c0f17;border:1px solid #303448;border-radius:13px;touch-action:manipulation}
+.cell{padding:0;min-width:0;aspect-ratio:1;border-radius:4px;background:#242735;border:1px solid #303446}
+.cell.filled{border-color:transparent;box-shadow:inset 0 1px 3px #ffffff30,0 1px 4px #0008}
+.cell.preview{outline:1px solid #fff;background:#ffffff55!important}
+.cell.invalid{background:#d9576544!important}
+.pieces{display:flex;justify-content:space-around;gap:8px;padding:10px}
+.pieceWrap{flex:1;display:flex;justify-content:center;align-items:center;min-width:0}
+.piece{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr);gap:3px;width:min(100%,84px);aspect-ratio:1;padding:5px;border-radius:11px;background:#222635;border:1px solid #454b61}
+.piece.selected{border-color:#b69aff;background:#37304d;box-shadow:0 0 14px #9876ff55}
+.mini{border-radius:3px}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.message{text-align:center;color:var(--muted);font-size:12px;min-height:18px}
+.achievement{display:flex;align-items:center;gap:10px;padding:10px;background:#222635;border:1px solid #353b50;border-radius:12px}
+.medal{width:42px;height:42px;border-radius:12px;background:#35304c;display:grid;place-items:center;font-size:22px;flex-shrink:0}
+.view[hidden], [hidden]{display:none!important}
+.toast{padding:12px;text-align:center;border-radius:12px;background:#33284c;border:1px solid #9b7bea}
+.footer{text-align:center;font-size:10px;color:#646b80;padding:5px}
+@media(min-height:850px){.app{justify-content:space-between}.board{gap:5px;padding:9px}.cell{border-radius:5px}}
+</style>
+</head>
+<body>
+<main class="app">
+<header><div class="brand"><small>PUZZLE EXPERIENCE</small><h1>BLOCK<span>FLOW</span></h1></div><div style="text-align:right;color:var(--muted);font-size:11px">OFFLINE READY<br>V 1.0</div></header>
+<nav class="tabs"><button id="gameTab" class="active">🎮 SPIELEN</button><button id="achTab">🏆 ERFOLGE</button></nav>
+<section id="gameView" class="view">
+<div class="tabs"><button id="classic" class="active">CLASSIC</button><button id="challenge">CHALLENGE</button></div>
+<div class="stats">
+<div class="stat"><small>PUNKTE</small><strong id="score">0</strong></div>
+<div class="stat"><small>REKORD</small><strong id="best">0</strong></div>
+<div class="stat"><small>GESAMT</small><strong id="total">0</strong></div>
+</div>
+<div id="challengeBox" class="panel" hidden><div class="between"><b id="level">LEVEL 1</b><span id="goalText" style="color:var(--muted);font-size:12px">0 / 8 Linien</span></div><div class="progress"><div id="goalBar"></div></div></div>
+<div class="between"><div><b style="font-size:13px">SPIELFELD 10 × 10</b><div id="hint" style="font-size:11px;color:var(--muted)">Stein auswählen und platzieren</div></div><button id="restart">↻ Neustart</button></div>
+<div id="board" class="board" aria-label="10 mal 10 Spielfeld"></div>
+<div class="between"><b style="font-size:13px">DEINE STEINE</b><span id="remaining" style="font-size:11px;color:var(--muted)">3 verfügbar</span></div>
+<div id="pieces" class="panel pieces"></div>
+<div class="controls"><button id="rotate" class="primary">↻ 90° DREHEN</button><button id="resetRotation">↺ AUSRICHTUNG</button></div>
+<div id="toast" class="toast" hidden><b id="toastTitle">🏆 Erfolg freigeschaltet!</b><div id="toastDesc" style="font-size:12px;color:#d8d0ee"></div></div>
+<div id="status" class="message" aria-live="polite">Wähle einen Stein. Du kannst ihn beliebig drehen.</div>
+<div id="gameOver" class="panel" style="padding:14px;text-align:center" hidden><b style="font-size:20px">GAME OVER</b><p id="finalScore" style="color:var(--muted);font-size:13px"></p><button id="again" class="primary" style="width:100%">Nochmal spielen</button></div>
+</section>
+<section id="achView" class="view" hidden>
+<div class="panel" style="padding:13px"><div class="between"><b>DEINE ERFOLGE</b><b id="achCount" style="color:#bba4ff">0 / 12</b></div><div class="progress"><div id="achBar"></div></div><p style="color:var(--muted);font-size:12px">Fortschritte und Abzeichen bleiben auf diesem Gerät gespeichert.</p></div>
+<div class="stats"><div class="stat"><small>GESAMTPUNKTE</small><strong id="allScore">0</strong></div><div class="stat"><small>SPIELE</small><strong id="games">0</strong></div><div class="stat"><small>BESTE COMBO</small><strong id="bestCombo">0</strong></div></div>
+<div id="achList" style="display:flex;flex-direction:column;gap:8px"></div>
+</section>
+<div class="footer">BLOCKFLOW · Dein Spiel. Deine Rekorde.</div>
+</main>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));}</script><script src="game.js"></script>
+</body></html>

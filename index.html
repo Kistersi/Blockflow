@@ -61,7 +61,7 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 <main class="app">
 <section id="homeView" class="home">
   <div><div class="home-mark">▦</div><div class="home-kicker">PUZZLE EXPERIENCE</div><h2>BLOCK<span>FLOW</span></h2><p class="home-sub">Finde deinen Flow. Platziere deine Steine. Schlag deinen Rekord.</p><p class="home-sub">DEIN REKORD: <b id="homeBest">0</b></p></div>
-  <div class="home-actions"><button id="startClassic" class="primary">▶ &nbsp; CLASSIC SPIELEN</button><button id="startChallenge" class="secondary">⚡ &nbsp; CHALLENGE</button><button id="openAchievements" class="secondary">🏆 &nbsp; ERFOLGE</button><button id="openUpgrades" class="secondary">🪙 &nbsp; UPGRADES</button></div>
+  <div class="home-actions"><button id="startClassic" class="primary">▶ &nbsp; CLASSIC SPIELEN</button><button id="startChallenge" class="secondary">⚡ &nbsp; CHALLENGE</button><button id="openAchievements" class="secondary">🏆 &nbsp; ERFOLGE</button><button id="openUpgrades" class="secondary">🛒 &nbsp; STORE</button></div>
   <div class="home-meta"><span>10 × 10 GRID</span><span>OFFLINE READY</span><span>V 1.0</span></div>
 </section>
 <header id="appHeader" hidden><div class="brand"><small>PUZZLE EXPERIENCE</small><h1>BLOCK<span>FLOW</span></h1></div><div style="text-align:right;color:var(--muted);font-size:11px">OFFLINE READY<br>V 1.0</div></header>
@@ -88,7 +88,7 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 <div class="stats"><div class="stat"><small>GESAMTPUNKTE</small><strong id="allScore">0</strong></div><div class="stat"><small>SPIELE</small><strong id="games">0</strong></div><div class="stat"><small>BESTE COMBO</small><strong id="bestCombo">0</strong></div></div>
 <div id="achList" style="display:flex;flex-direction:column;gap:8px"></div>
 </section>
-<section id="upgradeView" class="view" hidden><div class="between"><button id="backHomeUpgrades">← STARTSEITE</button><div class="coin-pill">🪙 <b id="upgradeCoins">0</b> MÜNZEN</div></div><div class="panel" style="padding:14px"><div class="home-kicker">WERDE STÄRKER</div><h2 style="margin:5px 0 4px;font-size:25px">UPGRADES</h2><p style="margin:0;color:var(--muted);font-size:12px">Gib deine Münzen aus und verbessere deine Fähigkeiten dauerhaft.</p></div><div id="upgradeList" class="upgrade-list"></div><div class="message" id="upgradeMessage">Weitere Upgrades kommen später dazu.</div></section>
+<section id="upgradeView" class="view" hidden><div class="between"><button id="backHomeUpgrades">← STARTSEITE</button><div class="coin-pill">🪙 <b id="upgradeCoins">0</b> MÜNZEN</div></div><div class="panel" style="padding:14px"><div class="home-kicker">BLOCKFLOW SHOP</div><h2 style="margin:5px 0 4px;font-size:25px">STORE</h2><p style="margin:0;color:var(--muted);font-size:12px">Kaufe Bomben und verbessere deine Ausrüstung mit deinen Münzen.</p></div><div id="upgradeList" class="upgrade-list"></div><div class="message" id="upgradeMessage">Wähle deine Ausrüstung und setze deine Münzen gezielt ein.</div></section>
 <div class="footer">BLOCKFLOW · Dein Spiel. Deine Rekorde.</div>
 </main>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));}</script><script src="game.js"></script>

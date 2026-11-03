@@ -1,7 +1,7 @@
 (()=>{
 'use strict';
 const $=id=>document.getElementById(id);
-const SHAPES=[[[0,0]],[[0,0],[1,0]],[[0,0],[0,1]],[[0,0],[1,0],[2,0]],[[0,0],[0,1],[0,2]],[[0,0],[1,0],[0,1],[1,1]],[[0,0],[1,0],[2,0],[3,0]],[[0,0],[0,1],[0,2],[0,3]],[[0,0],[1,0],[2,0],[0,1]],[[0,0],[1,0],[1,1],[2,1]],[[0,0],[0,1],[1,1],[2,1]],[[0,0],[1,0],[2,0],[1,1]],[[0,0],[1,0],[2,0],[0,1],[1,1],[2,1]],[[1,0],[0,1],[1,1],[2,1],[1,2]]];
+const SHAPES=[[[0,0]],[[0,0],[1,0]],[[0,0],[0,1]],[[0,0],[1,0],[2,0]],[[0,0],[1,0],[0,1]],[[0,0],[0,1],[0,2]],[[0,0],[1,0],[0,1],[1,1]],[[0,0],[1,0],[2,0],[3,0]],[[0,0],[0,1],[0,2],[0,3]],[[0,0],[1,0],[2,0],[0,1]],[[0,0],[1,0],[1,1],[2,1]],[[0,0],[0,1],[1,1],[2,1]],[[0,0],[1,0],[2,0],[1,1]],[[0,0],[1,0],[2,0],[0,1],[1,1],[2,1]],[[1,0],[0,1],[1,1],[2,1],[1,2]]];
 const COLORS=['#9a75ff','#32c9e7','#ffae52','#ef6da9','#69d99a','#f1d65c'];
 const ACH=[['100','🥉','Erster Schritt','Erreiche 100 Punkte',100,'best'],['500','🥈','Aufsteiger','Erreiche 500 Punkte',500,'best'],['1000','🏆','Block-Profi','Erreiche 1.000 Punkte',1000,'best'],['5000','👑','Meister','Erreiche 5.000 Punkte',5000,'best'],['10000','💎','Legende','Erreiche 10.000 Punkte',10000,'best'],['25000','🔥','Unaufhaltsam','Erreiche 25.000 Punkte',25000,'best'],['double','⚡','Doppelt hält besser','Lösche 2 Linien gleichzeitig',2,'lines'],['triple','🌟','Dreifach','Lösche 3 Linien gleichzeitig',3,'lines'],['combo3','🔗','Kettenreaktion','Erreiche 3 Combos hintereinander',3,'combo'],['combo10','💥','Combo-Meister','Erreiche 10 Combos hintereinander',10,'combo'],['games5','🎮','Warmgespielt','Spiele 5 Runden',5,'games'],['games25','🚀','Stammspieler','Spiele 25 Runden',25,'games']];
 let saved={};try{saved=JSON.parse(localStorage.getItem('blockflow-data')||'{}')}catch(e){}

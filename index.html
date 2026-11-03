@@ -211,7 +211,31 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 </section>
 <section id="storeView" class="view" hidden><div class="between"><button id="backHomeStore">← STARTSEITE</button><div class="coin-pill">🪙 <b id="storeCoins">0</b> MÜNZEN</div></div><div class="panel" style="padding:14px"><div class="home-kicker">BLOCKFLOW SHOP</div><h2 style="margin:5px 0 4px;font-size:25px">STORE</h2><p style="margin:0;color:var(--muted);font-size:12px">Hier kaufst du Verbrauchsgegenstände für deine Runde.</p></div><div id="storeList" class="upgrade-list"></div></section>
 <section id="upgradeView" class="view" hidden><div class="between"><button id="backHomeUpgrades">← STARTSEITE</button><div class="coin-pill">🪙 <b id="upgradeCoins">0</b> MÜNZEN</div></div><div class="panel" style="padding:14px"><div class="home-kicker">DAUERHAFTE VERBESSERUNGEN</div><h2 style="margin:5px 0 4px;font-size:25px">UPGRADES</h2><p style="margin:0;color:var(--muted);font-size:12px">Verbessere dauerhaft deine Fähigkeiten und Bombenwirkung.</p></div><div id="upgradeList" class="upgrade-list"></div></section>
-<div class="footer">BLOCKFLOW · Dein Spiel. Deine Rekorde.</div>
+<div class="footer">BLOCKFLOW · Dein Spiel. Deine Rekorde. <span id="appVersion">VERSION 60</span><span id="updateStatus" style="display:block;margin-top:4px;color:#a99acb">↻ SUCHE NACH UPDATES …</span></div>
 </main>
-<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));}</script><script src="game.js"></script>
+<script>
+(()=>{const status=()=>document.getElementById('updateStatus');const show=t=>{const el=status();if(el)el.textContent=t};
+ if(!('serviceWorker' in navigator)){show('OFFLINE-MODUS NICHT VERFÜGBAR');return}
+ let refreshing=false,updateWaiting=false;
+ navigator.serviceWorker.addEventListener('controllerchange',()=>{if(updateWaiting&&!refreshing){refreshing=true;show('UPDATE INSTALLIERT · STARTE NEU …');window.location.reload()}});
+ window.addEventListener('load',async()=>{
+  try{
+   const reg=await navigator.serviceWorker.register('./sw.js');
+   show('↻ SUCHE NACH UPDATES …');
+   reg.addEventListener('updatefound',()=>{
+    const worker=reg.installing;if(!worker)return;
+    worker.addEventListener('statechange',()=>{
+     if(worker.state==='installed'&&navigator.serviceWorker.controller){
+      updateWaiting=true;show('✓ UPDATE GEFUNDEN · WIRD INSTALLIERT …');
+     }
+    });
+   });
+   await reg.update();
+   if(!updateWaiting)show(navigator.onLine?'✓ APP IST AKTUELL':'● OFFLINE · GESPEICHERTE VERSION');
+  }catch(e){show(navigator.onLine?'UPDATE-CHECK NICHT MÖGLICH':'● OFFLINE · GESPEICHERTE VERSION')}
+ });
+ window.addEventListener('online',()=>show('↻ INTERNET VERFÜGBAR · PRÜFE UPDATES …'));
+ window.addEventListener('offline',()=>show('● OFFLINE · GESPEICHERTE VERSION'));
+})();
+</script><script src="game.js"></script>
 </body></html>

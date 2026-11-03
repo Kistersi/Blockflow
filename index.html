@@ -40,6 +40,16 @@ button.primary{background:linear-gradient(110deg,#7958ec,#a34fe2);border:0}
 .medal{width:42px;height:42px;border-radius:12px;background:#35304c;display:grid;place-items:center;font-size:22px;flex-shrink:0}
 .view[hidden], [hidden]{display:none!important}
 .toast{padding:12px;text-align:center;border-radius:12px;background:#33284c;border:1px solid #9b7bea}
+.home{min-height:calc(100dvh - 48px);display:flex;flex-direction:column;justify-content:center;gap:24px;text-align:center;padding:22px 8px}
+.home-mark{width:104px;height:104px;margin:0 auto 4px;border-radius:28px;display:grid;place-items:center;background:linear-gradient(145deg,#28213f,#151b2d);border:1px solid #67549b;box-shadow:0 0 38px #8d69ff30,inset 0 0 24px #8d69ff18;font-size:48px;color:#bba5ff}
+.home-kicker{font-size:10px;letter-spacing:.32em;color:#b69aff;font-weight:800}
+.home h2{font-size:42px;letter-spacing:-2px;margin:4px 0 0;line-height:1}
+.home h2 span{color:#a58aff}
+.home-sub{color:var(--muted);font-size:13px;line-height:1.6;max-width:270px;margin:10px auto 0}
+.home-actions{display:flex;flex-direction:column;gap:11px;max-width:330px;width:100%;margin:0 auto}
+.home-actions button{min-height:54px;font-size:14px;letter-spacing:.04em}
+.home-actions .secondary{background:#202536;border-color:#414963}
+.home-meta{display:flex;justify-content:center;gap:22px;color:#777f98;font-size:10px;letter-spacing:.08em}
 .footer{text-align:center;font-size:10px;color:#646b80;padding:5px}
 @media(min-height:850px){.app{justify-content:space-between}.board{gap:5px;padding:9px}.cell{border-radius:5px}}
 </style>
@@ -47,8 +57,8 @@ button.primary{background:linear-gradient(110deg,#7958ec,#a34fe2);border:0}
 <body>
 <main class="app">
 <header><div class="brand"><small>PUZZLE EXPERIENCE</small><h1>BLOCK<span>FLOW</span></h1></div><div style="text-align:right;color:var(--muted);font-size:11px">OFFLINE READY<br>V 1.0</div></header>
-<nav class="tabs"><button id="gameTab" class="active">🎮 SPIELEN</button><button id="achTab">🏆 ERFOLGE</button></nav>
-<section id="gameView" class="view">
+<nav id="topTabs" class="tabs" hidden><button id="gameTab" class="active">🎮 SPIELEN</button><button id="achTab">🏆 ERFOLGE</button></nav>
+<section id="gameView" class="view" hidden>
 <div class="tabs"><button id="classic" class="active">CLASSIC</button><button id="challenge">CHALLENGE</button></div>
 <div class="stats">
 <div class="stat"><small>PUNKTE</small><strong id="score">0</strong></div>
@@ -56,7 +66,7 @@ button.primary{background:linear-gradient(110deg,#7958ec,#a34fe2);border:0}
 <div class="stat"><small>GESAMT</small><strong id="total">0</strong></div>
 </div>
 <div id="challengeBox" class="panel" hidden><div class="between"><b id="level">LEVEL 1</b><span id="goalText" style="color:var(--muted);font-size:12px">0 / 8 Linien</span></div><div class="progress"><div id="goalBar"></div></div></div>
-<div class="between"><div><b style="font-size:13px">SPIELFELD 10 × 10</b><div id="hint" style="font-size:11px;color:var(--muted)">Stein auswählen und platzieren</div></div><button id="restart">↻ Neustart</button></div>
+<div class="between"><div><b style="font-size:13px">SPIELFELD 10 × 10</b><div id="hint" style="font-size:11px;color:var(--muted)">Stein auswählen und platzieren</div></div><div style="display:flex;gap:6px"><button id="backHome">⌂ Menü</button><button id="restart">↻ Neustart</button></div></div>
 <div id="board" class="board" aria-label="10 mal 10 Spielfeld"></div>
 <div class="between"><b style="font-size:13px">DEINE STEINE</b><span id="remaining" style="font-size:11px;color:var(--muted)">3 verfügbar</span></div>
 <div id="pieces" class="panel pieces"></div>
@@ -65,7 +75,7 @@ button.primary{background:linear-gradient(110deg,#7958ec,#a34fe2);border:0}
 <div id="status" class="message" aria-live="polite">Wähle einen Stein. Du kannst ihn beliebig drehen.</div>
 <div id="gameOver" class="panel" style="padding:14px;text-align:center" hidden><b style="font-size:20px">GAME OVER</b><p id="finalScore" style="color:var(--muted);font-size:13px"></p><button id="again" class="primary" style="width:100%">Nochmal spielen</button></div>
 </section>
-<section id="achView" class="view" hidden>
+<section id="achView" class="view" hidden>\n<button id="backHomeAch" style="width:100%;margin-bottom:10px">← ZUR STARTSEITE</button>
 <div class="panel" style="padding:13px"><div class="between"><b>DEINE ERFOLGE</b><b id="achCount" style="color:#bba4ff">0 / 12</b></div><div class="progress"><div id="achBar"></div></div><p style="color:var(--muted);font-size:12px">Fortschritte und Abzeichen bleiben auf diesem Gerät gespeichert.</p></div>
 <div class="stats"><div class="stat"><small>GESAMTPUNKTE</small><strong id="allScore">0</strong></div><div class="stat"><small>SPIELE</small><strong id="games">0</strong></div><div class="stat"><small>BESTE COMBO</small><strong id="bestCombo">0</strong></div></div>
 <div id="achList" style="display:flex;flex-direction:column;gap:8px"></div>

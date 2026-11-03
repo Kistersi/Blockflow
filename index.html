@@ -56,6 +56,11 @@ button.primary{background:linear-gradient(110deg,#7958ec,#a34fe2);border:0}
 </head>
 <body>
 <main class="app">
+<section id="homeView" class="home">
+  <div><div class="home-mark">▦</div><div class="home-kicker">PUZZLE EXPERIENCE</div><h2>BLOCK<span>FLOW</span></h2><p class="home-sub">Finde deinen Flow. Platziere deine Steine. Schlag deinen Rekord.</p></div>
+  <div class="home-actions"><button id="startClassic" class="primary">▶ &nbsp; CLASSIC SPIELEN</button><button id="startChallenge" class="secondary">⚡ &nbsp; CHALLENGE</button><button id="openAchievements" class="secondary">🏆 &nbsp; ERFOLGE</button></div>
+  <div class="home-meta"><span>10 × 10 GRID</span><span>OFFLINE READY</span><span>V 1.0</span></div>
+</section>
 <header id="appHeader" hidden><div class="brand"><small>PUZZLE EXPERIENCE</small><h1>BLOCK<span>FLOW</span></h1></div><div style="text-align:right;color:var(--muted);font-size:11px">OFFLINE READY<br>V 1.0</div></header>
 <nav id="topTabs" class="tabs" hidden><button id="gameTab" class="active">🎮 SPIELEN</button><button id="achTab">🏆 ERFOLGE</button></nav>
 <section id="gameView" class="view" hidden>
@@ -66,7 +71,7 @@ button.primary{background:linear-gradient(110deg,#7958ec,#a34fe2);border:0}
 <div class="stat"><small>GESAMT</small><strong id="total">0</strong></div>
 </div>
 <div id="challengeBox" class="panel" hidden><div class="between"><b id="level">LEVEL 1</b><span id="goalText" style="color:var(--muted);font-size:12px">0 / 8 Linien</span></div><div class="progress"><div id="goalBar"></div></div></div>
-<div class="between"><div><b style="font-size:13px">SPIELFELD 10 × 10</b><div id="hint" style="font-size:11px;color:var(--muted)">Stein auswählen und platzieren</div></div><div style="display:flex;gap:6px"><button id="backHome">⌂ Menü</button><button id="restart">↻ Neustart</button></div></div>
+<div class="between"><div><b style="font-size:13px">SPIELFELD 10 × 10</b><div id="hint" style="font-size:11px;color:var(--muted)">Stein auswählen und platzieren</div></div><div style="display:flex;gap:6px"><button id="backHome">⌂ Menü</button><div style="display:flex;gap:6px"><button id="backHome">⌂ Menü</button><button id="restart">↻ Neustart</button></div></div></div>
 <div id="board" class="board" aria-label="10 mal 10 Spielfeld"></div>
 <div class="between"><b style="font-size:13px">DEINE STEINE</b><span id="remaining" style="font-size:11px;color:var(--muted)">3 verfügbar</span></div>
 <div id="pieces" class="panel pieces"></div>
@@ -82,5 +87,11 @@ button.primary{background:linear-gradient(110deg,#7958ec,#a34fe2);border:0}
 </section>
 <div class="footer">BLOCKFLOW · Dein Spiel. Deine Rekorde.</div>
 </main>
-<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));}</script><script src="game.js"></script>
+<script>
+function showHome(){document.getElementById('appHeader').hidden=true;document.getElementById('homeView').hidden=false;document.getElementById('gameView').hidden=true;document.getElementById('achView').hidden=true;document.getElementById('topTabs').hidden=true}
+function showGame(nextMode){mode=nextMode;document.getElementById('appHeader').hidden=false;newGame();document.getElementById('homeView').hidden=true;document.getElementById('gameView').hidden=false;document.getElementById('achView').hidden=true;document.getElementById('topTabs').hidden=false;document.getElementById('gameTab').classList.add('active');document.getElementById('achTab').classList.remove('active')}
+function showAchievements(){document.getElementById('appHeader').hidden=true;document.getElementById('homeView').hidden=true;document.getElementById('gameView').hidden=true;document.getElementById('achView').hidden=false;document.getElementById('topTabs').hidden=true;renderAchievements()}
+document.getElementById('startClassic').onclick=()=>showGame('classic');document.getElementById('startChallenge').onclick=()=>showGame('challenge');document.getElementById('openAchievements').onclick=showAchievements;document.getElementById('backHome').onclick=showHome;document.getElementById('backHomeAch').onclick=showHome;
+showHome();
+</script><script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));}</script><script src="game.js"></script>
 </body></html>

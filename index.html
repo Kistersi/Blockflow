@@ -154,6 +154,20 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 .magic-fill-icon{color:#c7aaff;text-shadow:0 0 9px #a47aff}
 @keyframes starDropGlow{0%{transform:scale(.25);filter:brightness(2.5)}65%{transform:scale(1.2)}100%{transform:scale(1);filter:brightness(1)}}
  .ad-info{display:block;margin-top:10px;color:var(--muted);font-size:10px;line-height:1.5}
+
+#installPrompt{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(5,7,16,.82);backdrop-filter:blur(12px)}
+#installPrompt.visible{display:flex}
+.install-card{width:min(100%,390px);padding:25px 22px;border:1px solid rgba(170,115,255,.48);border-radius:22px;background:linear-gradient(155deg,#19172b,#10121b 70%);box-shadow:0 0 45px rgba(144,84,255,.2);color:#f5f1ff;text-align:center}
+.install-card h2{margin:0 0 8px;font-size:27px;letter-spacing:1px}
+.install-card h2 span{color:#b58aff}
+.install-card p{color:#c4bfd4;font-size:14px;line-height:1.5;margin:8px 0 18px}
+.install-steps{display:grid;gap:11px;text-align:left;padding:15px;border-radius:14px;background:rgba(255,255,255,.045);margin-bottom:18px}
+.install-step{display:flex;align-items:center;gap:11px;font-size:13px;color:#eee9fa}
+.install-step b{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:9px;background:rgba(171,122,255,.18);color:#c6a3ff;font-size:16px}
+.install-actions{display:grid;gap:9px}
+.install-actions button{width:100%;min-height:44px;border:0;border-radius:12px;font-weight:800;letter-spacing:.5px}
+#installNow{background:linear-gradient(100deg,#8d5bff,#c078ff);color:#fff}
+#installLater{background:rgba(255,255,255,.08);color:#d7d0e8}
 </style>
 </head>
 <body>
@@ -172,7 +186,7 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
     <div class="energy-core"><span>✦</span></div>
   </div>
   <div class="home-actions"><button id="startClassic" class="primary">▶ &nbsp; CLASSIC SPIELEN</button><button id="startChallenge" class="secondary">⚡ &nbsp; CHALLENGE</button><button id="openAchievements" class="secondary">🏆 &nbsp; ERFOLGE</button><button id="openStore" class="secondary">🛒 &nbsp; STORE</button><button id="openUpgrades" class="secondary">⚙️ &nbsp; UPGRADES</button></div>
-  <div class="home-meta"><span>10 × 10 GRID</span><span>OFFLINE READY</span><span id="homeConnection">● VERBINDUNG WIRD GEPRÜFT</span><span>V 63</span></div>
+  <div class="home-meta"><span>10 × 10 GRID</span><span>OFFLINE READY</span><span id="homeConnection">● VERBINDUNG WIRD GEPRÜFT</span><span>V 64</span></div>
 </section>
 <header id="appHeader" hidden><div class="brand"><small>PUZZLE EXPERIENCE</small><h1>BLOCK<span>FLOW</span></h1></div><div style="text-align:right;color:var(--muted);font-size:11px"><span id="gameConnection">● VERBINDUNG WIRD GEPRÜFT</span><br>OFFLINE READY<br>V 63</div></header>
 <section id="gameView" class="view" hidden>
@@ -211,10 +225,35 @@ button.active{background:#42365f;border-color:var(--accent);color:#e0d4ff}button
 </section>
 <section id="storeView" class="view" hidden><div class="between"><button id="backHomeStore">← STARTSEITE</button><div class="coin-pill">🪙 <b id="storeCoins">0</b> MÜNZEN</div></div><div class="panel" style="padding:14px"><div class="home-kicker">BLOCKFLOW SHOP</div><h2 style="margin:5px 0 4px;font-size:25px">STORE</h2><p style="margin:0;color:var(--muted);font-size:12px">Hier kaufst du Verbrauchsgegenstände für deine Runde.</p></div><div id="storeList" class="upgrade-list"></div></section>
 <section id="upgradeView" class="view" hidden><div class="between"><button id="backHomeUpgrades">← STARTSEITE</button><div class="coin-pill">🪙 <b id="upgradeCoins">0</b> MÜNZEN</div></div><div class="panel" style="padding:14px"><div class="home-kicker">DAUERHAFTE VERBESSERUNGEN</div><h2 style="margin:5px 0 4px;font-size:25px">UPGRADES</h2><p style="margin:0;color:var(--muted);font-size:12px">Verbessere dauerhaft deine Fähigkeiten und Bombenwirkung.</p></div><div id="upgradeList" class="upgrade-list"></div></section>
-<div class="footer">BLOCKFLOW · Dein Spiel. Deine Rekorde. <span id="appVersion">VERSION 63</span><span id="updateStatus" style="display:block;margin-top:4px;color:#a99acb">↻ SUCHE NACH UPDATES …</span></div>
+<div id="installPrompt" role="dialog" aria-modal="true" aria-labelledby="installTitle"><div class="install-card"><h2 id="installTitle">BLOCK<span>FLOW</span></h2><p>Dein Spiel. Immer dabei. Füge BLOCKFLOW zum Home-Bildschirm hinzu und spiele jederzeit – auch offline.</p><div class="install-steps" id="installSteps"><div class="install-step"><b>1</b><span>Tippe auf das <strong>Teilen-Symbol</strong> in Safari.</span></div><div class="install-step"><b>2</b><span>Wähle <strong>„Zum Home-Bildschirm“</strong>.</span></div><div class="install-step"><b>3</b><span>Tippe auf <strong>„Hinzufügen“</strong>.</span></div></div><div class="install-actions"><button id="installNow">APP HINZUFÜGEN</button><button id="installLater">SPÄTER</button></div></div></div>
+<div class="footer">BLOCKFLOW · Dein Spiel. Deine Rekorde. <span id="appVersion">VERSION 64</span><span id="updateStatus" style="display:block;margin-top:4px;color:#a99acb">↻ SUCHE NACH UPDATES …</span></div>
 </main>
 <script>
 (()=>{const status=()=>document.getElementById('updateStatus');const show=t=>{const el=status();if(el)el.textContent=t};
+
+ const installBox=document.getElementById('installPrompt');
+ const installBtn=document.getElementById('installNow');
+ const installLater=document.getElementById('installLater');
+ let deferredInstall=null;
+ const isStandalone=()=>window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+ const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.MSStream;
+ const hideInstall=()=>{if(installBox)installBox.classList.remove('visible')};
+ const showInstall=()=>{if(!isStandalone()&&!sessionStorage.getItem('blockflowInstallDismissed')&&installBox)installBox.classList.add('visible')};
+ if(installBox){
+  if(isStandalone()){hideInstall()}
+  else if(isIOS()){showInstall();installBtn.textContent='ANLEITUNG ANZEIGEN';}
+  else if(!/android/i.test(navigator.userAgent)){showInstall();installBtn.textContent='INSTALLATIONSANLEITUNG';}
+  window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredInstall=event;installBtn.textContent='APP JETZT INSTALLIEREN';showInstall()});
+  installBtn.addEventListener('click',async()=>{
+   if(deferredInstall){deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;hideInstall();return}
+   if(isIOS()){document.getElementById('installSteps').innerHTML='<div class="install-step"><b>1</b><span>Tippe unten in Safari auf das <strong>Teilen-Symbol</strong> (Quadrat mit Pfeil).</span></div><div class="install-step"><b>2</b><span>Scrolle im Menü und wähle <strong>„Zum Home-Bildschirm“</strong>.</span></div><div class="install-step"><b>3</b><span>Bestätige mit <strong>„Hinzufügen“</strong>.</span></div>';installBtn.textContent='VERSTANDEN';installBtn.onclick=hideInstall;return}
+   document.getElementById('installSteps').innerHTML='<div class="install-step"><b>1</b><span>Öffne das Browser-Menü <strong>⋮</strong>.</span></div><div class="install-step"><b>2</b><span>Wähle <strong>„App installieren“</strong> oder „Zum Startbildschirm hinzufügen“.</span></div>';
+   installBtn.textContent='VERSTANDEN';installBtn.onclick=hideInstall;
+  });
+  installLater.addEventListener('click',()=>{sessionStorage.setItem('blockflowInstallDismissed','1');hideInstall()});
+  window.addEventListener('appinstalled',hideInstall);
+ }
+
  const updateConnection=()=>{const online=navigator.onLine;const label=online?'● ONLINE':'● OFFLINE';['homeConnection','gameConnection'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=label;el.style.color=online?'#69d99a':'#ff8b8b'}})};
  updateConnection();window.addEventListener('online',updateConnection);window.addEventListener('offline',updateConnection);
  if(!('serviceWorker' in navigator)){show('OFFLINE-MODUS NICHT VERFÜGBAR');return}

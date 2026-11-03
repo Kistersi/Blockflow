@@ -23,11 +23,12 @@ $('board').addEventListener('click',e=>{let b=e.target.closest('[data-r]');if(b&
 $('rotate').onclick=()=>{if(selected<0){$('status').textContent='Bitte zuerst einen Stein auswählen.';return}rotate(parts[selected]);render();$('status').textContent='Stein um 90° gedreht.'};
 $('resetRotation').onclick=()=>{if(selected<0)return;let p=parts[selected];while(p.rotations!==0)rotate(p);render();$('status').textContent='Ursprüngliche Ausrichtung wiederhergestellt.'};
 $('restart').onclick=()=>newGame();$('again').onclick=()=>newGame();
-$('classic').onclick=()=>{mode='classic';newGame()};$('challenge').onclick=()=>{mode='challenge';newGame()};
+$('classic').onclick=()=>{mode='classic';applyModeTheme();newGame()};$('challenge').onclick=()=>{mode='challenge';applyModeTheme();newGame()};
 $('gameTab').onclick=()=>{$('gameView').hidden=false;$('achView').hidden=true;$('gameTab').classList.add('active');$('achTab').classList.remove('active')};
 $('achTab').onclick=()=>{$('gameView').hidden=true;$('achView').hidden=false;$('achTab').classList.add('active');$('gameTab').classList.remove('active');renderAchievements()};
+function applyModeTheme(){ $('gameView').classList.toggle('mode-challenge',mode==='challenge');$('gameView').classList.toggle('mode-classic',mode==='classic');$('modeLabel').textContent=(mode==='challenge'?'CHALLENGE':'CLASSIC')+' · SPIELFELD 10 × 10';$('challengeBox').hidden=mode!=='challenge';$('hint').textContent=mode==='challenge'?'Erreiche 8 Linien pro Level.':'Platziere Steine und knacke deinen Rekord.';}
 function showHome(){ $('homeBest').textContent=data.best.toLocaleString('de-DE');$('appHeader').hidden=true;$('homeView').hidden=false;$('gameView').hidden=true;$('achView').hidden=true;$('topTabs').hidden=true; }
-function showGame(nextMode){mode=nextMode;$('gameView').classList.toggle('mode-challenge',mode==='challenge');$('gameView').classList.toggle('mode-classic',mode==='classic');$('modeLabel').textContent=(mode==='challenge'?'CHALLENGE':'CLASSIC')+' · SPIELFELD 10 × 10';$('appHeader').hidden=false;newGame();$('homeView').hidden=true;$('gameView').hidden=false;$('achView').hidden=true;$('topTabs').hidden=false;$('gameTab').classList.add('active');$('achTab').classList.remove('active')}
+function showGame(nextMode){mode=nextMode;applyModeTheme();$('appHeader').hidden=false;newGame();$('homeView').hidden=true;$('gameView').hidden=false;$('achView').hidden=true;$('topTabs').hidden=false;$('gameTab').classList.add('active');$('achTab').classList.remove('active')}
 function showAchievements(){ $('appHeader').hidden=true;$('homeView').hidden=true;$('gameView').hidden=true;$('achView').hidden=false;$('topTabs').hidden=true;renderAchievements() }
 $('startClassic').onclick=()=>showGame('classic');$('startChallenge').onclick=()=>showGame('challenge');$('openAchievements').onclick=showAchievements;$('backHome').onclick=showHome;$('backHomeAch').onclick=showHome;
 showHome();newGame();renderAchievements();

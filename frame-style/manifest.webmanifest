@@ -1,0 +1,15 @@
+{
+  "name": "FRAME / STYLE – Foto-Atelier",
+  "short_name": "FRAME / STYLE",
+  "description": "Dein persönliches Foto-Atelier",
+  "lang": "de-DE",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#11100f",
+  "theme_color": "#11100f",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
